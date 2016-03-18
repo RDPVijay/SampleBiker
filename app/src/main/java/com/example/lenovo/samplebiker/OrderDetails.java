@@ -81,11 +81,6 @@ public class OrderDetails extends FragmentActivity {
                 .findFragmentById(R.id.map);
         map = mapFragment.getMap();
 
-        //currlat = 11.5360445;
-        //currlong = 78.4897566;
-
-
-
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
         if (map != null) {
@@ -93,7 +88,6 @@ public class OrderDetails extends FragmentActivity {
             // Enable MyLocation Button in the Map
 
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
                 //    ActivityCompat#requestPermissions
                 // here to request the missing permissions, and then overriding
                 //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
@@ -110,7 +104,7 @@ public class OrderDetails extends FragmentActivity {
             currlong = resources.getLongitude();
 
             source = new LatLng(currlat, currlong);
-            CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(source, 5);
+            CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(source, 15);
             map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
             map.animateCamera(yourLocation);
 

@@ -11,9 +11,6 @@ import java.util.Arrays;
 import java.util.List;
 
 
-/**
- * Created by Lenovo on 2/26/2016.
- */
 public class OrderList extends ListActivity implements ListAdapter.customButtonListener {
 
 
@@ -22,7 +19,6 @@ public class OrderList extends ListActivity implements ListAdapter.customButtonL
     ArrayList<String> dataItems = new ArrayList<String>();
     ArrayList<String> dataItems2 = new ArrayList<String>();
 
-    int p=-1;
 
 
     public void onCreate(Bundle savedInstanceState){
@@ -45,17 +41,13 @@ public class OrderList extends ListActivity implements ListAdapter.customButtonL
         adapter.setCustomButtonListener(OrderList.this);
         listView.setAdapter(adapter);
 
-
     }
-
-
 
     @Override
     public void onButtonClickListener(int position, String value, String value2) {
 
-        Toast.makeText(OrderList.this, "Button click " + value + value2, Toast.LENGTH_SHORT).show();
+        Toast.makeText(OrderList.this, "Button click " + value +" " + value2, Toast.LENGTH_SHORT).show();
 
-        p = position;
         Intent i = new Intent(this, OrderDetails.class);
         i.putExtra("Sour", value);
         i.putExtra("Dest", value2);

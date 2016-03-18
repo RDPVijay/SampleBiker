@@ -8,6 +8,18 @@ import android.widget.Toast;
 
 public class SignUp extends Activity {
 
+    private static final String EMAIL_PATTERN =
+            "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                    + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
+
+    private static final String PS = "\\w{4,12}";
+
+    private static final String UN = "\\w{1,}";
+
+    private static final String PN = "\\w{10}";
+
+
     DatabaseHelper helper = new DatabaseHelper(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +51,31 @@ public class SignUp extends Activity {
                 Toast pass = Toast.makeText(SignUp.this , "Passwords don't match!" , Toast.LENGTH_SHORT);
                 pass.show();
             }
+
+            else if(!emailstr.matches(EMAIL_PATTERN))
+            {
+                Toast.makeText(SignUp.this , "Invalid Email ID" , Toast.LENGTH_SHORT).show();
+            }
+
+            else if(!pass1str.matches(PS))
+            {
+                Toast.makeText(SignUp.this , "Password should 4-12Character" , Toast.LENGTH_SHORT).show();
+            }
+            else if(!unamestr.matches(UN))
+            {
+                Toast.makeText(SignUp.this , "Please Fill the Username" , Toast.LENGTH_SHORT).show();
+            }
+            else if(!namestr.matches(UN))
+            {
+                Toast.makeText(SignUp.this , "Please Fill the Name" , Toast.LENGTH_SHORT).show();
+            }
+            else if(!phnno.getText().toString().matches(PN))
+            {
+                Toast.makeText(SignUp.this , "Invalid Phone number" , Toast.LENGTH_SHORT).show();
+            }
+
+
+
             else
             {
                 String mail = helper.searchEmail(emailstr);
@@ -62,7 +99,6 @@ public class SignUp extends Activity {
                     finish();
                 }
             }
-
 
         }
 
