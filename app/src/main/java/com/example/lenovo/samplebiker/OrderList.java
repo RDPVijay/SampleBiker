@@ -59,24 +59,8 @@ public class OrderList extends ListActivity implements ListAdapter.customButtonL
         Intent i = new Intent(this, OrderDetails.class);
         i.putExtra("Sour", value);
         i.putExtra("Dest", value2);
-        startActivityForResult(i,2);
+        startActivity(i);
 
-    }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Intent i = data;
-        Boolean val = i.getBooleanExtra("VAL",false);
-        if (requestCode == 2){
-
-            Toast.makeText(this,"Task Has been completed",Toast.LENGTH_LONG);
-            //adapter.setChecked(val, p);
-            //listView.setAdapter(adapter);
-
-
-        }
     }
 
 }

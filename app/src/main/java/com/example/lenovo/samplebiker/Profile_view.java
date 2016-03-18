@@ -1,8 +1,8 @@
 package com.example.lenovo.samplebiker;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -11,6 +11,7 @@ import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.Profile;
@@ -26,7 +27,7 @@ import org.json.JSONObject;
 
 
 
-public class Profile_view extends AppCompatActivity{
+public class Profile_view extends Activity {
 
 
 
@@ -115,7 +116,7 @@ public class Profile_view extends AppCompatActivity{
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.profile_view);
-            MyApplication my = new MyApplication();
+            FacebookSdk.sdkInitialize(getApplicationContext());
             mCallbackManager = CallbackManager.Factory.create();
             setupTokenTracker();
             setupProfileTracker();
@@ -163,7 +164,7 @@ public class Profile_view extends AppCompatActivity{
             mTokenTracker.stopTracking();
             mProfileTracker.stopTracking();
             profilePic = (ProfilePictureView)findViewById(R.id.myProfilePic);
-            profilePic.setProfileId(null);
+            profilePic.setProfileId(String.valueOf(R.drawable.com_facebook_profile_picture_blank_portrait));
             bTextDetails = (TextView)findViewById(R.id.text_bday);
             bTextDetails.setText(null);
             Log.d("EXIT","Successfully logged out");

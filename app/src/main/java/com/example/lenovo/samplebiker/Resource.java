@@ -27,12 +27,12 @@ public class Resource extends Service implements LocationListener {
     boolean isNetworkEnabled = false;
     boolean canGetLocation = false;
 
-    public static Location location;
+    public Location location;
     public static double lat, lon;
 
-    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10;
+    private static final float MIN_DISTANCE_CHANGE_FOR_UPDATES = (float) 10.0;
 
-    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1;
+    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 5;
 
     protected LocationManager locationManager;
 
@@ -40,12 +40,14 @@ public class Resource extends Service implements LocationListener {
 
         this.context = c;
         getLocation();
+        Log.v("Resource","Constructor");
 
     }
 
     private Location getLocation() {
 
         try {
+            Log.v("Getlocation","try");
             locationManager = (LocationManager) context.getSystemService(LOCATION_SERVICE);
 
             isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -53,6 +55,7 @@ public class Resource extends Service implements LocationListener {
             isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
             if (!isGpsEnabled && !isNetworkEnabled){
+                Log.v("Getlocation", "if");
 
             }
             else {
@@ -70,6 +73,7 @@ public class Resource extends Service implements LocationListener {
 
                             lat = location.getLatitude();
                             lon = location.getLongitude();
+                            Log.v("SourceNET", ""+lat);
 
                         }
                     }
@@ -87,6 +91,7 @@ public class Resource extends Service implements LocationListener {
 
                                 lat = location.getLatitude();
                                 lon = location.getLongitude();
+                                Log.v("SourceGPS", ""+lat);
 
                             }
                         }
@@ -101,13 +106,13 @@ public class Resource extends Service implements LocationListener {
 
     }
 
-    public static double getLatitude(){
+    public double getLatitude(){
         if (location != null)
             lat = location.getLatitude();
         return lat;
     }
 
-    public static double getLongitude(){
+    public double getLongitude(){
         if (location != null)
             lon = location.getLongitude();
         return lon;
@@ -148,6 +153,8 @@ public class Resource extends Service implements LocationListener {
 
     @Override
     public void onLocationChanged(Location location) {
+
+
 
     }
 
