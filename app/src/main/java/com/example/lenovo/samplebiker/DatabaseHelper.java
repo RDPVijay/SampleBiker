@@ -107,4 +107,29 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
         return b;
     }
+
+    public String searchUnam(String unamestr) {
+
+        db = this.getReadableDatabase();
+        String query = "select uname from "+TABLE_NAME;
+        Cursor cursor = db.rawQuery(query , null);
+        String a, b;
+        b = "not found";
+        if(cursor.moveToFirst())
+        {
+            do{
+                a = cursor.getString(0);
+
+                if(a.equals(unamestr))
+                {
+                    b = cursor.getString(0);
+                    break;
+                }
+            }
+            while(cursor.moveToNext());
+        }
+
+        return b;
+
+    }
 }

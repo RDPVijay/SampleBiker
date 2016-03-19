@@ -79,12 +79,21 @@ public class SignUp extends Activity {
             else
             {
                 String mail = helper.searchEmail(emailstr);
+                String unam = helper.searchUnam(unamestr);
+
                 if (emailstr.equals(mail))
                 {
 
                     Toast.makeText(SignUp.this , "Email id already exists!" , Toast.LENGTH_SHORT).show();
 
                 }
+                else if (unamestr.equals(unam))
+                {
+
+                    Toast.makeText(SignUp.this , "Username already exists!" , Toast.LENGTH_SHORT).show();
+
+                }
+
                 else {
                     //insert the detailes in database
 
@@ -97,6 +106,7 @@ public class SignUp extends Activity {
 
                     helper.insertContact(c);
                     finish();
+
                 }
             }
 
@@ -104,6 +114,4 @@ public class SignUp extends Activity {
 
     }
 
-
 }
-
