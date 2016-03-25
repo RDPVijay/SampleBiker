@@ -46,7 +46,7 @@ public class OrderList extends ListActivity implements ListAdapter.customButtonL
     @Override
     public void onButtonClickListener(int position, String value, String value2) {
 
-        Toast.makeText(OrderList.this, "Button click " + value +" " + value2, Toast.LENGTH_SHORT).show();
+        Toast.makeText(OrderList.this, "Map to " + value2, Toast.LENGTH_SHORT).show();
 
         Intent i = new Intent(this, OrderDetails.class);
         i.putExtra("Sour", value);
