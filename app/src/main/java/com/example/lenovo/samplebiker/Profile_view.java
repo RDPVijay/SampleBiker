@@ -37,6 +37,8 @@ public class Profile_view extends Activity {
         private CallbackManager mCallbackManager;
         private AccessTokenTracker mTokenTracker;
         private ProfileTracker mProfileTracker;
+        AccessToken token;
+        public  String bd;
 
         private ProfilePictureView profilePic;
 
@@ -46,7 +48,7 @@ public class Profile_view extends Activity {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Log.d("VIVZ", "onSuccess");
-                loginResult.getAccessToken();
+                token = loginResult.getAccessToken();
                 Profile profile = Profile.getCurrentProfile();
                 mTextDetails.setText(constructWelcomeMessage(profile));
                 profilePic = (ProfilePictureView) findViewById(R.id.myProfilePic);
@@ -74,6 +76,7 @@ public class Profile_view extends Activity {
 
                                 try {
                                     String email = object.getString("email");
+
                                     eTextDetails.setText(email);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -83,6 +86,7 @@ public class Profile_view extends Activity {
 
                                 try {
                                     String birthday = object.getString("birthday");
+                                    bd=birthday;
                                     bTextDetails.setText(birthday);
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -102,7 +106,8 @@ public class Profile_view extends Activity {
 
             @Override
             public void onCancel() {
-                Log.d("VIVZ", "onCancel");
+                Log.d("oncancel", "on cancel");
+                profilePic.setProfileId(String.valueOf(R.drawable.com_facebook_profile_picture_blank_portrait));
             }
 
             @Override
@@ -120,7 +125,7 @@ public class Profile_view extends Activity {
             mCallbackManager = CallbackManager.Factory.create();
             setupTokenTracker();
             setupProfileTracker();
-
+            MyApplication O =new MyApplication();
             mTokenTracker.startTracking();
             mProfileTracker.startTracking();
             mTextDetails = (TextView) findViewById(R.id.text_details);
@@ -149,6 +154,13 @@ public class Profile_view extends Activity {
                     }
                 }
             }).executeAsync();
+
+
+            bTextDetails = (TextView)findViewById(R.id.text_bday);
+
+
+
+
         }
         @Override
         protected void onPause() {
@@ -163,12 +175,7 @@ public class Profile_view extends Activity {
             super.onStop();
             mTokenTracker.stopTracking();
             mProfileTracker.stopTracking();
-            profilePic = (ProfilePictureView)findViewById(R.id.myProfilePic);
-            profilePic.setProfileId(String.valueOf(R.drawable.com_facebook_profile_picture_blank_portrait));
-            bTextDetails = (TextView)findViewById(R.id.text_bday);
-            bTextDetails.setText(null);
-            Log.d("EXIT","Successfully logged out");
-
+            
         }
 
         @Override
@@ -182,6 +189,8 @@ public class Profile_view extends Activity {
                 @Override
                 protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken currentAccessToken) {
                     Log.d("VIVZ", "" + currentAccessToken);
+                    profilePic.setProfileId(String.valueOf(R.drawable.com_facebook_profile_picture_blank_portrait));
+                    bTextDetails.setText(null);
                 }
             };
         }
