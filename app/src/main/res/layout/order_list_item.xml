@@ -44,8 +44,4 @@
         android:layout_alignParentTop="true"
         android:layout_alignEnd="@id/checkBox" />
 
-
-
-
-
 </RelativeLayout>

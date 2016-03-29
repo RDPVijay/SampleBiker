@@ -5,6 +5,8 @@ android {
     //compileSdkVersion "Google Inc.:Google APIs:21"
     buildToolsVersion "23.0.2"
 
+    useLibrary 'org.apache.http.legacy'
+
     defaultConfig {
         applicationId "com.example.lenovo.samplebiker"
         minSdkVersion 21
